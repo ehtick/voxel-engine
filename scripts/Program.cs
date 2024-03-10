@@ -201,15 +201,13 @@ class Window : GameWindow
         // imgui dataset generation
         for (int i = 0; i < 2; i++) ImGui.Spacing();
         ImGui.TextColored(new System.Numerics.Vector4(0, 1, 0.8f, 1), "dataset generation:");
-        string[] dataSetType = new string[4]{"sphere", "simplex noise", "jawbreaker", "occlusion test"};
+        string[] dataSetType = new string[3]{"sphere", "simplex noise", "occlusion test"};
         ImGui.SetNextItemWidth(itemsWidth); ImGui.Combo("dataset type", ref currentDataSetType, dataSetType, dataSetType.Length);
         if (ImGui.Button("generate", new System.Numerics.Vector2(itemsWidth, 0)))
         {
-            // generate voxeldata
-            if (currentDataSetType == 0) voxels.LoadSphere();
-            if (currentDataSetType == 1) voxels.LoadNoise();
-            if (currentDataSetType == 2) voxels.LoadJawBreaker();
-            if (currentDataSetType == 3) voxels.LoadOcclusionTest();
+            if (currentDataSetType == 0) voxels.LoadSphere(256);
+            if (currentDataSetType == 1) voxels.LoadNoise(256);
+            if (currentDataSetType == 2) voxels.LoadOcclusionTest(256);
         }
 
         // imgui end
