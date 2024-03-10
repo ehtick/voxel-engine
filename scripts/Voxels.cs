@@ -11,7 +11,7 @@ public class Voxels
 
     public Voxels()
     {
-        LoadSphere(256);
+        LoadVox("vox/dragon.vox");
     }
 
     public void Save()
