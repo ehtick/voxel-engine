@@ -30,7 +30,7 @@ class Window : GameWindow
     Vector2 camOrbitRotation;
     float cameraDistance = 600;
 
-    int voxelTraceSteps = 600;
+    int voxelTraceSteps = 1000;
     bool canvasAABBcheck = true;
 
     bool showDebugView = false;
@@ -88,7 +88,7 @@ class Window : GameWindow
     {
         base.OnUpdateFrame(args);
 
-        // update vars
+        // general stuff
         VSync = vsync ? VSyncMode.On : VSyncMode.Off;
         timePassed += (float)args.Time;
         frametimes.Add((float)args.Time);
@@ -179,7 +179,7 @@ class Window : GameWindow
         // imgui rendering settings
         for (int i = 0; i < 2; i++) ImGui.Spacing();
         ImGui.TextColored(new System.Numerics.Vector4(0, 1, 0.8f, 1), "rendering settings:");
-        ImGui.SetNextItemWidth(itemsWidth); ImGui.SliderInt("ray steps", ref voxelTraceSteps, 10, 1000);
+        ImGui.SetNextItemWidth(itemsWidth); ImGui.SliderInt("ray steps", ref voxelTraceSteps, 10, 2000);
         ImGui.SetNextItemWidth(itemsWidth); ImGui.SliderFloat("shadow bias", ref shadowBias, 0.1f, 4);
         ImGui.Checkbox("shadows", ref shadows);
         ImGui.Checkbox("vvao", ref vvao);
@@ -219,10 +219,8 @@ class Window : GameWindow
         shader.UseMainProgram();
         shader.SetVector2("resolution", ((Vector2)Size));
         shader.SetFloat("iTime", timePassed);
-
         shader.SetBool("showDebugView", showDebugView);
         shader.SetInt("debugView", debugView);
-
         shader.SetBool("canvasAABBcheck", canvasAABBcheck);
         shader.SetBool("shadows", shadows);
         shader.SetBool("vvao", vvao);
